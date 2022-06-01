@@ -47,3 +47,22 @@ spec:
       protocol: TCP
       port: 8078
       targetPort: http-web-svc
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: hello-fail-pre-sync
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      containers:
+        - name: fail
+          image: alpine:latest
+          command:
+            - "exit"
+            - "1"
+      restartPolicy: Never
+  backoffLimit: 2
