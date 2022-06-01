@@ -51,7 +51,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: hello-fail-pre-sync
+  generateName: hello-succeed-pre-sync
   annotations:
     argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
@@ -62,7 +62,9 @@ spec:
         - name: fail
           image: alpine:latest
           command:
-            - "exit"
-            - "1"
+            - "sh"
+            - "-c"
+            - "echo"
+            - "'success'"
       restartPolicy: Never
   backoffLimit: 2
