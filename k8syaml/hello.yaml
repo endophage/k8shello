@@ -1,15 +1,20 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: hello-deployment
   namespace: hello
   labels:
     app: hello
 spec:
-  replicas: 2
+  replicas: 4
   selector:
     matchLabels:
       app: hello
+  strategy:
+    canary:
+      steps:
+        - setWeight: 50
+        - pause: {}
   template:
     metadata:
       labels:
