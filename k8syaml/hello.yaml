@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: hello
-          image: dclwrnc/hello:crashlog
+          image: dclwrnc/hello:3.0.0
           ports:
             - containerPort: 8085
               name: http-web-svc
